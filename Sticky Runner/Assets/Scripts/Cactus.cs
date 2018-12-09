@@ -34,9 +34,8 @@ public class Cactus : MonoBehaviour {
             for (int i = 0; i < spriteCount; i++)
             {
 
-                // cactiSprites[i] = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Obstacles/cactus" + i, typeof(Sprite));
                 cactiSprites[i] = (Sprite) Resources.Load<Sprite>("Sprites/Obstacles/cactus" + i);
-                print(cactiSprites[i]);
+                
 
             }
         }
@@ -45,13 +44,12 @@ public class Cactus : MonoBehaviour {
     }
 
 
-    // Use this for initialization
     void Start () {
 
         
 
         speed = 15f;
-        endX = -16f;
+        endX = -30f;
         spawnDistance = 24f;
         spawnRandomMax = 4f;
 
@@ -62,9 +60,7 @@ public class Cactus : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //spawnDistance += acceleration;
         spawn = new Vector3(spawnDistance, -4.5f, 0f);
-        //spawnRandomMax -= acceleration;
 
         speed += acceleration;
         gameObject.transform.position -= new Vector3(speed * Time.deltaTime, 0f, 0f);
@@ -79,7 +75,6 @@ public class Cactus : MonoBehaviour {
     {
 
 
-        //spriteRender.sprite = cactiSprites[index];
         Destroy(poly);
         poly = this.gameObject.AddComponent<PolygonCollider2D>();
         poly.isTrigger = true;

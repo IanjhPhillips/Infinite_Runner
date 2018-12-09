@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 
 public class Runner : MonoBehaviour {
@@ -14,12 +14,10 @@ public class Runner : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collider)
     {
 
-        // print("colliding");
-        // print(collider.transform.tag);
+        
         if (collider.transform.tag == "Cactus")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            print("You died!");
+            GameManager.LoadScene(0, true); //loads the current level
         }
 
     }
@@ -27,8 +25,7 @@ public class Runner : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        // print("colliding");
-        // print(collider.transform.tag);
+        
         if (collision.transform.tag == "Jumpable")
         {
             grounded = true;
@@ -39,8 +36,6 @@ public class Runner : MonoBehaviour {
     private void OnCollisionExit2D(Collision2D collision)
     {
 
-        // print("colliding");
-        // print(collider.transform.tag);
         if (collision.transform.tag == "Jumpable")
         {
             grounded = false;
@@ -60,23 +55,17 @@ public class Runner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        /*
-        if (rigidBody.velocity.y > 0)
-            rigidBody.gravityScale = 1f;
         
-        else
-            rigidBody.gravityScale = 10f;
-        */
         if (Input.GetKeyDown("space") && grounded ) {
 
             
-            rigidBody.gravityScale = 2f;
-            rigidBody.AddForce(new Vector2(0f, 15f), ForceMode2D.Impulse);
+            rigidBody.gravityScale = 1f;
+            rigidBody.AddForce(new Vector2(0f, 28f), ForceMode2D.Impulse);
             
         }
         else if (Input.GetKeyUp("space") || rigidBody.velocity.y < 0)
         {
-            print("release");
+            
             rigidBody.gravityScale = 5f;   
 
         }
